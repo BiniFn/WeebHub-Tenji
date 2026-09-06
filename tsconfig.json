@@ -1,0 +1,40 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "allowImportingTsExtensions": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/app/*": [
+        "./app/*"
+      ],
+      "expo-mpv-player": [
+        "./modules/expo-mpv-player/src/index"
+      ],
+      "expo-download-manager": [
+        "./modules/expo-download-manager/src/index"
+      ],
+      "expo-external-player": [
+        "./modules/expo-external-player/src/index"
+      ],
+      "expo-offline-logger": [
+        "./modules/expo-offline-logger/src/index"
+      ],
+      "expo-tv-focus": [
+        "./modules/expo-tv-focus/src/index"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "uniwind-types.d.ts"
+  ]
+}
