@@ -28,11 +28,11 @@ import { downloadLabel, playerLabel, streamLabel } from "@/lib/profile/profile-i
 import { cn } from "@/lib/utils"
 import { toast } from "@/lib/utils/toast"
 import { Ionicons } from "@expo/vector-icons"
-import { Image } from "expo-image"
+import { Image as ExpoImage } from "expo-image"
 import { router } from "expo-router"
 import { useAtomValue } from "jotai"
 import * as React from "react"
-import { ActivityIndicator, Alert, Image, Platform, ScrollView, Text, View } from "react-native"
+import { ActivityIndicator, Alert, Platform, ScrollView, Text, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import * as Linking from "expo-linking"
 
@@ -141,8 +141,8 @@ function MobileProfileScreen() {
                 setIsClearingImageCache(true)
 
                 const [memoryCleared, diskCleared] = await Promise.all([
-                    Image.clearMemoryCache(),
-                    Image.clearDiskCache(),
+                    ExpoImage.clearMemoryCache(),
+                    ExpoImage.clearDiskCache(),
                 ])
 
                 if (!memoryCleared && !diskCleared) {
@@ -227,7 +227,7 @@ function MobileProfileScreen() {
                 {/* header / user info */}
                 <View className="items-center pt-8 pb-6 gap-3">
                     {viewer?.avatar?.large ? (
-                        <Image
+                        <ExpoImage
                             source={{ uri: viewer.avatar.large }}
                             style={{ width: 80, height: 80, borderRadius: 40 }}
                             contentFit="cover"

@@ -3,23 +3,21 @@ import type { ConfigContext, ExpoConfig } from "expo/config"
 export default ({ config }: ConfigContext): ExpoConfig => {
     const isTV = process.env.EXPO_TV === "1"
     const isTVDev = isTV && process.env.WEEBHUB_TV_DEV === "1"
-    const version = "0.3.0"
+    const version = "0.3.2"
     const otaChannel = isTV ? "stable-tv" : "stable"
-    const otaUrl = isTV
-        ? "https://weebhub.app/api/ota/tv/manifest"
-        : "https://weebhub.app/api/ota/manifest"
+    const otaUrl = process.env.EXPO_UPDATES_URL
 
     return {
         ...config,
-        name: isTV ? "WeebHub Tenji" : "WeebHub",
-        slug: "weebhub-app",
+        name: "WeebHub Tenji",
+        slug: "weebhub-tenji",
         version,
         orientation: isTV ? "default" : "portrait",
         icon: "./src/assets/images/icon.png",
         scheme: "weebhub",
         userInterfaceStyle: "automatic",
         runtimeVersion: isTV ? `${version}-tv` : { policy: "appVersion" },
-        updates: isTVDev ? {
+        updates: isTVDev || !otaUrl ? {
             enabled: false,
         } : {
             enabled: true,
@@ -31,7 +29,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
             },
         },
         ios: {
-            buildNumber: "23",
+            buildNumber: "24",
             appleTeamId: process.env.EXPO_APPLE_TEAM_ID || "",
             supportsTablet: true,
             bundleIdentifier: process.env.EXPO_IOS_BUNDLE_ID || "app.weebhub.tenji",
@@ -64,7 +62,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         },
         android: {
             jsEngine: "hermes",
-            versionCode: 23,
+            versionCode: 24,
             usesCleartextTraffic: true,
             adaptiveIcon: {
                 foregroundImage: "./src/assets/images/adaptive-icon.png",

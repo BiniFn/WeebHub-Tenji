@@ -202,7 +202,7 @@ export default function Screen() {
                 </Card>
 
                 {/*<Pressable*/}
-                {/*    onPress={() => Linking.openURL("https://weebhub.app/mobile-server")}*/}
+                {/*    onPress={() => Linking.openURL("https://github.com/BiniFn/WeebHub-Mobile-Server")}*/}
                 {/*    className="mt-4 flex-row items-center justify-center gap-1.5 active:opacity-75"*/}
                 {/*>*/}
                 {/*    <Ionicons name="information-circle-outline" size={16} color="rgba(255,255,255,0.4)" />*/}

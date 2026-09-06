@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary        = 'Expo module for WeebHub background downloads'
   s.description    = 'Expo module for background file downloads on Android and iOS'
   s.author         = 'weebhub'
-  s.homepage       = 'https://github.com/5rahim/weebhub'
+  s.homepage       = 'https://github.com/BiniFn/WeebHub-Tenji'
   s.platforms      = { :ios => '15.1' }
   s.source         = { git: '' }
   s.static_framework = true

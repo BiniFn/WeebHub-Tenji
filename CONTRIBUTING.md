@@ -20,8 +20,8 @@ To build and run WeebHub Tenji, ensure your machine has the following tools inst
 
 1. Clone the codebase:
    ```bash
-   git clone https://github.com/5rahim/weebhub-tenji.git
-   cd weebhub-tenji
+   git clone https://github.com/BiniFn/WeebHub-Tenji.git
+   cd WeebHub-Tenji
    ```
 2. Install npm packages:
    ```bash

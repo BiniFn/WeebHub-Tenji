@@ -1,54 +1,63 @@
 <p align="center">
-<a href="https://weebhub.app/">
-<img src="src/assets/images/logo_2.png" alt="preview" width="70px"/>
-</a>
-</p>
-
-<h1 align="center"><b>WeebHub Tenji</b></h1>
-
-<p align="center">
-<img src="https://s3.weebhub.app/sea/tenji-banner.webp" alt="preview" width="100%"/>
-</p>
-
-<p align="center">
-  <a href="https://weebhub.app/docs">Documentation</a> |
-  <a href="https://github.com/5rahim/weebhub-tenji/releases">Latest release</a> |
-  <a href="https://weebhub.app/docs/policies">Copyright</a>
-</p>
-
-<div align="center">
-  <a href="https://github.com/sponsors/5rahim">
-    <img src="https://img.shields.io/static/v1?label=Sponsor&style=flat-square&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86" alt="" />
+  <a href="https://weebhub-pearl.vercel.app">
+    <img src="assets/weebhub-logo-v2.png" alt="WeebHub logo" width="112" />
   </a>
-</div>
+</p>
 
+<h1 align="center">WeebHub Tenji</h1>
 
-<h5 align="center">
-Consider becoming a sponsor if you like the project! ⭐️
-</h5>
+<p align="center">
+  Native companion client for the WeebHub media server on Android, Android TV, iOS, and tvOS.
+</p>
+
+<p align="center">
+  <a href="https://github.com/BiniFn/WeebHub">WeebHub Server</a> ·
+  <a href="https://github.com/BiniFn/WeebHub-Tenji/releases">Releases</a> ·
+  <a href="https://github.com/BiniFn/WeebHub-Tenji">Source</a>
+</p>
 
 ## About
 
-WeebHub Tenji is a mobile and TV **client app** for your WeebHub media server with a **built-in player** and **offline support** for streaming anime and reading manga.
+WeebHub Tenji is the mobile and TV client in the WeebHub ecosystem. Connect it to a WeebHub server to browse a local anime and manga library, stream supported sources, use the built-in media player, read manga, and keep downloaded media available offline.
 
-> [!IMPORTANT]
-> WeebHub Tenji does not provide, host, or distribute any media content. Users are responsible for obtaining media through legal means and complying with their local laws. </strong>
+WeebHub Tenji does not provide, host, or distribute media. You are responsible for using legally obtained media and complying with local law.
 
 ## Features
 
-- **Cross-platform**: Available on Android, AndroidTV, iOS and tvOS
-- **Built-in media player**: Powered by libmpv, supports most anime codecs and formats
-- **Playback Options**: Support for server local files, torrent, debrid and online streaming
-- **Manga Reader**: Read and download chapters on iOS and Android
-- **Download locally**: Download anime episodes and manga chapters to your mobile device
-- **External Player Support**: Support for opening media in mobile external players such as VLC, MX Player, Outplayer, etc.
-- **Offline Mode**: Access your downloaded anime episodes and manga chapters without an internet connection
+- Android, Android TV, iOS, and tvOS support
+- Built-in libmpv-backed playback and external-player handoff
+- Local, torrent, debrid, and online playback sources supported by the server
+- Manga reader with local/offline chapters
+- Anime episode and manga chapter downloads
+- Offline browsing and downloaded-media playback
+- Server connection, AniList, library, and download-management screens
+
+## Connect to WeebHub
+
+1. Run [WeebHub](https://github.com/BiniFn/WeebHub) on your computer or use WeebHub Mobile Server on a supported device.
+2. In Tenji, enter the server address, for example `http://192.168.1.10:43211`.
+3. Authenticate with the credentials configured on your WeebHub server.
+
+For a server running on the same device, use `http://127.0.0.1:43211`.
 
 ## Development
 
-WeebHub Tenji is built with React Native and Expo. Detailed guides on setup and local development workflows can be found in the [Contributing Guide](CONTRIBUTING.md).
+```bash
+git clone https://github.com/BiniFn/WeebHub-Tenji.git
+cd WeebHub-Tenji
+npm install
+npm test
+npx tsc --noEmit
+```
 
----
+Use `npm run dev:start`, `npm run dev:android`, or `npm run dev:ios` for local development. Android TV and tvOS commands are listed in `package.json`.
 
-> [!NOTE]
-> For copyright-related requests, please contact the maintainer using the contact information provided on [the website](https://weebhub.app/docs/policies).
+## Credits and Fork Attribution
+
+**Maintained and branded by BiniFn.**
+
+WeebHub Tenji is a modified fork of [Seanime Tenji](https://github.com/5rahim/seanime-tenji), which in turn belongs to the [Seanime](https://github.com/5rahim/seanime) ecosystem created by 5rahim and contributors. The original authors retain credit for the upstream architecture, client implementation, and included upstream code. WeebHub-specific branding, integration, and changes are maintained by BiniFn.
+
+## License
+
+WeebHub Tenji is licensed under the [GNU General Public License v3.0](LICENSE). See [LICENSES.md](LICENSES.md) for additional attribution and third-party notices.
