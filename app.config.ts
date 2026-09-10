@@ -3,7 +3,7 @@ import type { ConfigContext, ExpoConfig } from "expo/config"
 export default ({ config }: ConfigContext): ExpoConfig => {
     const isTV = process.env.EXPO_TV === "1"
     const isTVDev = isTV && process.env.WEEBHUB_TV_DEV === "1"
-    const version = "0.3.2"
+    const version = "5.0.0"
     const otaChannel = isTV ? "stable-tv" : "stable"
     const otaUrl = process.env.EXPO_UPDATES_URL
 
