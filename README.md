@@ -24,7 +24,7 @@ WeebHub Tenji does not provide, host, or distribute media. You are responsible f
 
 ## Features
 
-- Android, Android TV, iOS, and tvOS support
+- Android, Android TV, and tvOS support (iOS build coming soon)
 - Built-in libmpv-backed playback and external-player handoff
 - Local, torrent, debrid, and online playback sources supported by the server
 - Manga reader with local/offline chapters

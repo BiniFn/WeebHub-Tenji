@@ -3,6 +3,7 @@ import { getEpisodePercentageComplete, useGetContinuityWatchHistory } from "@/ap
 import { useServerStatus } from "@/atoms/server.atoms"
 import { EpisodeCardList } from "@/components/features/anime/episode-card-list"
 import { EpisodeListItem } from "@/components/features/anime/episode-list-item"
+import { AnimeEntryActionBar } from "@/components/features/media/anime-entry-action-bar"
 import { MediaEntryHeaderBackground, MediaEntryHeaderContent } from "@/components/features/media/media-entry-header"
 import { EPISODE_PAGE_SIZE, EpisodePageSelector } from "@/components/shared/episode-page-selector"
 import { LuffyError } from "@/components/shared/luffy-error"
@@ -180,10 +181,52 @@ export function AnimeEntryServerLocalView({
         return episode.localFile?.path || `${episode.type}-${episode.episodeNumber}-${index}`
     }, [])
 
+    const continuityItem = mediaId ? watchHistory?.[mediaId] : undefined
+    const { currentEpisode, currentResumeSeconds, nextEpisode } = React.useMemo(() => {
+        const fallbackNext = unwatchedMainEpisodes[0]
+        if (!continuityItem || continuityItem.duration <= 0) {
+            return {
+                currentEpisode: undefined,
+                currentResumeSeconds: 0,
+                nextEpisode: fallbackNext,
+            }
+        }
+
+        const ratio = continuityItem.currentTime / continuityItem.duration
+        const inProgress = ratio >= 0.02 && ratio < 0.85
+
+        if (!inProgress) {
+            return {
+                currentEpisode: undefined,
+                currentResumeSeconds: 0,
+                nextEpisode: fallbackNext,
+            }
+        }
+
+        const allAvailableEpisodes = fullSections.flatMap(s => s.data)
+        const foundCurrent = allAvailableEpisodes.find(ep => ep.episodeNumber === continuityItem.episodeNumber)
+        const foundNext = unwatchedMainEpisodes.find(ep => ep.episodeNumber !== continuityItem.episodeNumber) ?? fallbackNext
+
+        return {
+            currentEpisode: foundCurrent,
+            currentResumeSeconds: continuityItem.currentTime,
+            nextEpisode: foundNext,
+        }
+    }, [continuityItem, fullSections, unwatchedMainEpisodes])
+
     const listHeader = React.useMemo(() => (
             <>
                 <MediaEntryHeaderContent entry={entry} type="anime" onTitlePress={onTitlePress} />
                 <OfflineBanner />
+
+                <AnimeEntryActionBar
+                    entry={entry}
+                    nextEpisode={nextEpisode}
+                    currentEpisode={currentEpisode}
+                    currentResumeSeconds={currentResumeSeconds}
+                    onContinueWatching={currentEpisode ? () => onEpisodePress?.(currentEpisode) : (nextEpisode ? () => onEpisodePress?.(nextEpisode) : undefined)}
+                    onPlayNext={nextEpisode ? () => onEpisodePress?.(nextEpisode) : undefined}
+                />
 
                 <View className="px-4 py-2 items-center mb-4">
                     <Text className="text-xs font-medium text-foreground/40 tracking-wider">
@@ -206,7 +249,7 @@ export function AnimeEntryServerLocalView({
                 )}
             </>
         ),
-        [continueWatchingSpoilerActive, entry, entryProgress, mediaId, onEpisodePress, unwatchedMainEpisodes, watchHistory,
+        [continueWatchingSpoilerActive, currentEpisode, currentResumeSeconds, entry, entryProgress, mediaId, nextEpisode, onEpisodePress, unwatchedMainEpisodes, watchHistory,
             showDeferredContent, onTitlePress])
 
     return (
