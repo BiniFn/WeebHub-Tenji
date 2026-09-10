@@ -9,7 +9,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
 
     return {
         ...config,
-        name: "WeebHub Tenji",
+        name: isTV ? "WeebHub Tenji (TV)" : "WeebHub Tenji",
         slug: "weebhub-tenji",
         version,
         orientation: isTV ? "default" : "portrait",
