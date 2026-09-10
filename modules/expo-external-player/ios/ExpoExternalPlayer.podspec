@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary        = 'Opens videos in external players'
   s.description    = 'Expo module for opening videos in external players on Android and iOS'
   s.author         = 'weebhub'
-  s.homepage       = 'https://github.com/BiniFn/WeebHub-Tenji'
+  s.homepage       = 'https://github.com/5rahim/weebhub'
   s.platforms      = { :ios => '15.1' }
   s.source         = { git: '' }
   s.static_framework = true

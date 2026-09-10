@@ -28,13 +28,12 @@ import { downloadLabel, playerLabel, streamLabel } from "@/lib/profile/profile-i
 import { cn } from "@/lib/utils"
 import { toast } from "@/lib/utils/toast"
 import { Ionicons } from "@expo/vector-icons"
-import { Image as ExpoImage } from "expo-image"
+import { Image } from "expo-image"
 import { router } from "expo-router"
 import { useAtomValue } from "jotai"
 import * as React from "react"
-import { ActivityIndicator, Alert, Platform, ScrollView, Text, View } from "react-native"
+import { ActivityIndicator, Alert, Linking, Platform, ScrollView, Text, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import * as Linking from "expo-linking"
 
 export default function ProfileScreen() {
     if (Platform.isTV) {
@@ -141,8 +140,8 @@ function MobileProfileScreen() {
                 setIsClearingImageCache(true)
 
                 const [memoryCleared, diskCleared] = await Promise.all([
-                    ExpoImage.clearMemoryCache(),
-                    ExpoImage.clearDiskCache(),
+                    Image.clearMemoryCache(),
+                    Image.clearDiskCache(),
                 ])
 
                 if (!memoryCleared && !diskCleared) {
@@ -227,7 +226,7 @@ function MobileProfileScreen() {
                 {/* header / user info */}
                 <View className="items-center pt-8 pb-6 gap-3">
                     {viewer?.avatar?.large ? (
-                        <ExpoImage
+                        <Image
                             source={{ uri: viewer.avatar.large }}
                             style={{ width: 80, height: 80, borderRadius: 40 }}
                             contentFit="cover"
@@ -427,15 +426,25 @@ function MobileProfileScreen() {
                 <View className="mx-5 pt-4">
                     <Text className="text-muted-foreground text-sm text-right">{`v${otaVersionInfo.appVersion}`} | {`${otaVersionInfo.otaVersion}`}</Text>
                 </View>
-                <ProfileMenuSection title="Credits">
-                    <ProfileMenuItem
-                        icon="information-circle-outline"
-                        label="BiniFn / WeebHub Tenji"
-                        detail="Based on Seanime Tenji"
-                        onPress={() => Linking.openURL('https://github.com/BiniFn/WeebHub-Tenji')}
-                        hideChevron
-                    />
-                </ProfileMenuSection>
+
+                <View className="mx-5 my-4">
+                    <ProfileMenuSection title="Credits & Attribution">
+                        <ProfileMenuItem
+                            icon="information-circle-outline"
+                            label="Maintainer"
+                            detail="BiniFn"
+                            onPress={() => Linking.openURL("https://github.com/BiniFn/WeebHub-Tenji")}
+                            hideChevron
+                        />
+                        <ProfileMenuItem
+                            icon="heart-outline"
+                            label="Original Seanime Tenji"
+                            detail="5rahim"
+                            onPress={() => Linking.openURL("https://github.com/5rahim/seanime-tenji")}
+                            hideChevron
+                        />
+                    </ProfileMenuSection>
+                </View>
             </ScrollView>
         </SafeView>
     )

@@ -5,7 +5,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     const isTVDev = isTV && process.env.WEEBHUB_TV_DEV === "1"
     const version = "5.0.0"
     const otaChannel = isTV ? "stable-tv" : "stable"
-    const otaUrl = process.env.EXPO_UPDATES_URL
+    const otaUrl = isTV
+        ? "https://weebhub.app/api/ota/tv/manifest"
+        : "https://weebhub.app/api/ota/manifest"
 
     return {
         ...config,
@@ -17,7 +19,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         scheme: "weebhub",
         userInterfaceStyle: "automatic",
         runtimeVersion: isTV ? `${version}-tv` : { policy: "appVersion" },
-        updates: isTVDev || !otaUrl ? {
+        updates: isTVDev ? {
             enabled: false,
         } : {
             enabled: true,

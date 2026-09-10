@@ -188,39 +188,6 @@ export function AnimeEntryLibraryView({
         return episode.localFile?.path || `${episode.type}-${episode.episodeNumber}-${index}`
     }, [])
 
-    const continuityItem = mediaId ? watchHistory?.[mediaId] : undefined
-    const { currentEpisode, currentResumeSeconds, nextEpisode } = React.useMemo(() => {
-        const fallbackNext = unwatchedMainEpisodes[0]
-        if (!continuityItem || continuityItem.duration <= 0) {
-            return {
-                currentEpisode: undefined,
-                currentResumeSeconds: 0,
-                nextEpisode: fallbackNext,
-            }
-        }
-
-        const ratio = continuityItem.currentTime / continuityItem.duration
-        const inProgress = ratio >= 0.02 && ratio < 0.85
-
-        if (!inProgress) {
-            return {
-                currentEpisode: undefined,
-                currentResumeSeconds: 0,
-                nextEpisode: fallbackNext,
-            }
-        }
-
-        const allAvailableEpisodes = fullSections.flatMap(s => s.data)
-        const foundCurrent = allAvailableEpisodes.find(ep => ep.episodeNumber === continuityItem.episodeNumber)
-        const foundNext = unwatchedMainEpisodes.find(ep => ep.episodeNumber !== continuityItem.episodeNumber) ?? fallbackNext
-
-        return {
-            currentEpisode: foundCurrent,
-            currentResumeSeconds: continuityItem.currentTime,
-            nextEpisode: foundNext,
-        }
-    }, [continuityItem, fullSections, unwatchedMainEpisodes])
-
     const listHeader = React.useMemo(() => (
             <>
                 <MediaEntryHeaderContent entry={entry} type="anime" onTitlePress={onTitlePress} />
@@ -229,11 +196,8 @@ export function AnimeEntryLibraryView({
                 {isConnected && (
                     <AnimeEntryActionBar
                         entry={entry}
-                        nextEpisode={nextEpisode}
-                        currentEpisode={currentEpisode}
-                        currentResumeSeconds={currentResumeSeconds}
-                        onContinueWatching={currentEpisode ? () => onEpisodePress?.(currentEpisode) : (nextEpisode ? () => onEpisodePress?.(nextEpisode) : undefined)}
-                        onPlayNext={nextEpisode ? () => onEpisodePress?.(nextEpisode) : undefined}
+                        nextEpisode={unwatchedMainEpisodes[0]}
+                        onContinueWatching={unwatchedMainEpisodes[0] ? () => onEpisodePress?.(unwatchedMainEpisodes[0]) : undefined}
                     />
                 )}
 

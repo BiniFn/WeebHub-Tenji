@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary        = 'Expo module for WeebHub offline logs and crash capture'
   s.description    = 'Expo module for offline log persistence and best-effort native crash capture on Android and iOS'
   s.author         = 'weebhub'
-  s.homepage       = 'https://github.com/BiniFn/WeebHub-Tenji'
+  s.homepage       = 'https://github.com/5rahim/weebhub'
   s.platforms      = { :ios => '15.1', :tvos => '15.1' }
   s.source         = { git: '' }
   s.static_framework = true

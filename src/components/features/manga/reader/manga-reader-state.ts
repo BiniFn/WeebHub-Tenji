@@ -39,7 +39,7 @@ const mangaReaderSettingsAtom = atomWithStorage<Record<string, Partial<MangaRead
     { getOnInit: true },
 )
 
-export const mangaReaderPositionsAtom = atomWithStorage<Record<string, MangaReaderPosition>>(
+const mangaReaderPositionsAtom = atomWithStorage<Record<string, MangaReaderPosition>>(
     "weeb-mobile-manga-reader-positions",
     {},
     createAtomStorage<Record<string, MangaReaderPosition>>(),
@@ -142,30 +142,3 @@ export function useMangaReaderPosition(mediaId: number | undefined, provider: st
         setPageIndex,
     }
 }
-
-export function useMangaLastReadPosition(mediaId: number | undefined, provider: string | undefined) {
-    const [store] = useAtom(mangaReaderPositionsAtom)
-
-    return React.useMemo(() => {
-        if (!mediaId) return undefined
-
-        const prefix = provider ? `${String(mediaId)}:${provider}:` : `${String(mediaId)}:`
-        let latest: { chapterId: string; pageIndex: number; updatedAt: number } | undefined
-
-        for (const [key, pos] of Object.entries(store)) {
-            if (key.startsWith(prefix) && pos.pageIndex > 0) {
-                if (!latest || (pos.updatedAt || 0) > (latest.updatedAt || 0)) {
-                    const parts = key.split(":")
-                    const chapterId = parts.slice(2).join(":")
-                    latest = {
-                        chapterId,
-                        pageIndex: pos.pageIndex,
-                        updatedAt: pos.updatedAt || 0,
-                    }
-                }
-            }
-        }
-        return latest
-    }, [mediaId, provider, store])
-}
-

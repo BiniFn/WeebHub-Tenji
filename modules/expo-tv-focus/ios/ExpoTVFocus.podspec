@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary        = 'Android-style spatial focus for tvOS'
   s.description    = 'Applies Android FocusFinder rules to native tvOS focus guides'
   s.author         = 'weebhub'
-  s.homepage       = 'https://github.com/BiniFn/WeebHub-Tenji'
+  s.homepage       = 'https://github.com/5rahim/weebhub'
   s.platforms      = {
     :ios => '15.1',
     :tvos => '15.1'
